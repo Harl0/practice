@@ -19,9 +19,9 @@ object Time extends App {
 //
 
   // Recommended solution, but throws java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: OffsetSeconds error
-  val FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-
-  println(LocalDateTime.now(ZoneId.of("UCT")).format(FORMATTER))
+//  val FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+//
+//  println(LocalDateTime.now(ZoneId.of("UCT")).format(FORMATTER))
 
 
   // Ideal solution but Play Form wont accept
@@ -61,13 +61,22 @@ object Time extends App {
   val localTime = LocalTime.now()
   println(localTime)
 
-  val localDateTime = LocalDateTime.of(localDate, localTime)
-  println(instantFromLocalDateTime(localDateTime))
-println(Instant.now())
+//  val localDateTime = LocalDateTime.of(localDate, localTime)
+//  println(instantFromLocalDateTime(localDateTime))
+//println(Instant.now())
 
   def instantFromLocalDateTime(local : LocalDateTime): Instant = local.toInstant(ZoneId.systemDefault().getRules.getOffset(local))
 
+  def instantFromLocalDate(timeType: String, local: LocalDate): ZonedDateTime = {
+    timeType match {
+      case "startDate" => local.atStartOfDay().atZone(ZoneOffset.UTC)
+      case "endDate" => local.atTime(23, 59, 59).atZone(ZoneOffset.UTC)
+    }
+  }
 
+  val df = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX")
 
-  println(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN))
+  println(df.format(instantFromLocalDate("startDate", localDate)))
+
+//  println(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN))
 }
