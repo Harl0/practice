@@ -17,8 +17,6 @@ object Case extends App{
       case "One" => s"You chose option $input!"
       case "Two" => s"You chose option $input!"
       case _ => s"$input isn't an option, sorry!"
-
-
   }
 
 }
