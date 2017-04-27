@@ -1,33 +1,52 @@
 package practice
-import Constants._
+import models.UserModel
+import utils.Constants._
+
 /**
-  * Created by jason on 26/04/17.
+  * Created by jason on 27/04/17.
   */
-object CaseClassMatching extends App {
-  def personMatch(person: Person): String = {
-    person match {
-      case Person(ALICE, 25) => successMessage(person)
-      case Person(BOB, 32) => s"Hi $BOB!"
-//      case Person(name, age) => errorMessage(person)
-      case _ => errorMessage(person)
+object UserValidation {
+
+  /**
+    * @param user
+    * @return String
+    *         Solving the problem using IF logic
+    *         OK if just one condition is required
+    */
+  def validateUserIf(user: String): Any = {
+    if (user == "Jason") {
+      "Hi"
+    } else if (user == "Tom") {
+      "Hi"
+    } else {
+      "Not registered."
     }
   }
 
-  private def successMessage(person: Person): String ={
-    s"Hi ${person.name}!"
+  /**
+    * @param user
+    * @return String
+    *         Using match case is the recommended way of pattern matching in Scala
+    *         Validating the user against the UserModel
+    *         If a user is matched, a successResponse is produced
+    *         Otherwise an errorResponse is produced
+    */
+  def validateUser(user: UserModel): String = {
+    user match {
+      case UserModel(JASON, JASON_ID) => successResponse(user)
+      case UserModel(TOM, TOM_ID) => successResponse(user)
+      case _ => errorResponse(user)
+    }
   }
 
-  private def errorMessage(person: Person): String ={
-    s"Hi ${person.name}, sorry you are not allowed!"
-  }
+  /**
+    * @param user
+    * @return String
+    *         Private so to ensure these methods are not executed outside of our UserValidation scope
+    */
+  private def successResponse(user: UserModel): String = s"Hi ${user.userName}!"
 
+  private def errorResponse(user: UserModel): String = s"${user.userName} is not registered."
 
-
-  def ifMatching(person: Person): Any ={
-    if (person.name == "Jason")
-      successMessage(person)
-    else if (person.name == ALICE)
-      successMessage(person)
-  }
 }
-case class Person(name: String, age: Int)
+

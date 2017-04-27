@@ -1,7 +1,7 @@
 package katas
 
 import models.UserModel
-import practice.Constants._
+import utils.Constants._
 
 /**
   * Created by jason on 26/04/17.
