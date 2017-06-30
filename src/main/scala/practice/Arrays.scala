@@ -69,6 +69,10 @@ object Arrays extends App {
     }
   }
 
+  if (token.contains("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9")) {
+    println("token contains true")
+  }
+
   //  println(tokenSplit)
   //  val s = "eggs, milk, butter, Coco Puffs"
   //  println(s.split(","))
