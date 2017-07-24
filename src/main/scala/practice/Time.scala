@@ -79,4 +79,12 @@ object Time extends App {
   println(df.format(instantFromLocalDate("startDate", localDate)))
 
 //  println(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN))
+
+
+
+
+  val fullDate = Instant.now
+
+  println(fullDate)
+
 }

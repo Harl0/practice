@@ -8,7 +8,7 @@ object Case extends App{
   val selection = "One"
   selection match {
 
-    case "One" => println(s"You chose option $selection!")
+    case `selection` if selection == "One" => println(s"You chose option $selection!")
     case "Two" => println(s"You chose option $selection!")
     case _ => println(s"$selection isn't an option, sorry!")
   }
