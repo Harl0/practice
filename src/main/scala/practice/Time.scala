@@ -57,34 +57,44 @@ object Time extends App {
 
 //  DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parseDateTime(startDate)
 
-  val localDate = LocalDate.now()
-  val localTime = LocalTime.now()
-  println(localTime)
+//  val localDate = LocalDate.now()
+//  val localTime = LocalTime.now()
+//  println(localTime)
 
 //  val localDateTime = LocalDateTime.of(localDate, localTime)
 //  println(instantFromLocalDateTime(localDateTime))
 //println(Instant.now())
-
-  def instantFromLocalDateTime(local : LocalDateTime): Instant = local.toInstant(ZoneId.systemDefault().getRules.getOffset(local))
-
-  def instantFromLocalDate(timeType: String, local: LocalDate): ZonedDateTime = {
-    timeType match {
-      case "startDate" => local.atStartOfDay().atZone(ZoneOffset.UTC)
-      case "endDate" => local.atTime(23, 59, 59).atZone(ZoneOffset.UTC)
-    }
-  }
-
-  val df = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX")
-
-  println(df.format(instantFromLocalDate("startDate", localDate)))
+//
+//  def instantFromLocalDateTime(local : LocalDateTime): Instant = local.toInstant(ZoneId.systemDefault().getRules.getOffset(local))
+//
+//  def instantFromLocalDate(timeType: String, local: LocalDate): ZonedDateTime = {
+//    timeType match {
+//      case "startDate" => local.atStartOfDay().atZone(ZoneOffset.UTC)
+//      case "endDate" => local.atTime(23, 59, 59).atZone(ZoneOffset.UTC)
+//    }
+//  }
+//
+//  val df = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+//
+//  println(df.format(instantFromLocalDate("startDate", localDate)))
 
 //  println(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.MIN))
 
 
+//
+//  val fullDate = Instant.now
+//
+//  println(fullDate)
+
+  val currentEpoch: Long = 1501081283
+  val localDate =
+    Instant
+    .ofEpochSecond(currentEpoch)
+    .atZone(ZoneId.systemDefault())
+    .toLocalDateTime
 
 
-  val fullDate = Instant.now
+println(localDate)
 
-  println(fullDate)
 
 }
